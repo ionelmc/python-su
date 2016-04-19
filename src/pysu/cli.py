@@ -1,7 +1,7 @@
 import argparse
+import grp
 import os
 import pwd
-import grp
 
 try:
     from os import getgrouplist
@@ -74,4 +74,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

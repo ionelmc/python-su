@@ -16,6 +16,9 @@ include CONTRIBUTING.rst
 include LICENSE
 include README.rst
 
+include Dockerfile
+include .dockerignore
+
 include tox.ini .travis.yml appveyor.yml
 
 global-exclude *.py[cod] __pycache__ *.so *.dylib
