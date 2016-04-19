@@ -3,6 +3,13 @@ import os
 import pwd
 import grp
 
+try:
+    from os import getgrouplist
+except ImportError:
+    def getgrouplist(name, gid):
+        return [grp.getgrnam(gr.gr_name).gr_gid for gr in grp.getgrall() if name in gr.gr_mem]
+
+
 parser = argparse.ArgumentParser(description='Change user and exec command.')
 parser.add_argument('user')
 parser.add_argument('command')
@@ -54,7 +61,7 @@ def main():
     if group:
         os.setgroups([gid])
     else:
-        gl = os.getgrouplist(name, gid)
+        gl = getgrouplist(name, gid)
         os.setgroups(gl)
 
     os.setgid(gid)

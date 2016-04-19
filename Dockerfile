@@ -1,4 +1,4 @@
-FROM python:3.5-alpine
+FROM python:2.7-alpine
 # taken from https://github.com/tianon/gosu/blob/master/Dockerfile.test
 # however, some tests are disabled as I believe the handling is incorrect - if user don't exit then it should be an error, not
 # a fallback to root.
