@@ -1,0 +1,14 @@
+[paths]
+source =
+   src/pysu
+   */site-packages/pysu
+
+[run]
+branch = True
+source = pysu
+parallel = true
+
+[report]
+show_missing = true
+precision = 2
+omit = *migrations*
