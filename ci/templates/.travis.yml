@@ -24,7 +24,7 @@ install:
   - pip --version
   - tox --version
 script:
-  - if [ -z "$TOXENV"]; then tox -v; else docker build -f $DOCKERFILE .; fi
+  - if [ -z "$TOXENV" ]; then tox -v; else docker build -f $DOCKERFILE .; fi
 after_failure:
   - more .tox/log/* | cat
   - more .tox/*/log/* | cat
