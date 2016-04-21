@@ -7,8 +7,6 @@ Overview
 .. list-table::
     :stub-columns: 1
 
-    * - docs
-      - |docs|
     * - tests
       - | |travis| |requires|
         |
@@ -64,7 +62,16 @@ Installation
 Documentation
 =============
 
-https://python-su.readthedocs.org/
+Usage: pysu [-h] user[:group] command
+
+Change user and exec command.
+
+positional arguments:
+  user
+  command
+
+optional arguments:
+  -h, --help  show this help message and exit
 
 Development
 ===========
@@ -72,20 +79,3 @@ Development
 To run the all tests run::
 
     tox
-
-Note, to combine the coverage data from all the tox environments run:
-
-.. list-table::
-    :widths: 10 90
-    :stub-columns: 1
-
-    - - Windows
-      - ::
-
-            set PYTEST_ADDOPTS=--cov-append
-            tox
-
-    - - Other
-      - ::
-
-            PYTEST_ADDOPTS=--cov-append tox
