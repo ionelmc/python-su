@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals
 
+import glob
 import os
 import sys
-from os.path import exists
+from os.path import exists, split
 from os.path import join
 from os.path import dirname
 from os.path import abspath
@@ -41,16 +42,19 @@ if __name__ == "__main__":
         lstrip_blocks=True,
         keep_trailing_newline=True
     )
-
-    tox_environments = [
-        line.strip()
-        for line in subprocess.check_output(['tox', '--listenvs'], universal_newlines=True).splitlines()
-    ]
-    tox_environments = [line for line in tox_environments if line not in ['clean', 'report', 'docs', 'check']]
+    versions = ["2.7", "3.4", "3.5"]
+    dockerfiles = [join("ci", version, "Dockerfile") for version in versions]
 
 
     for name in os.listdir(join("ci", "templates")):
-        with open(join(base_path, name), "w") as fh:
-            fh.write(jinja.get_template(name).render(tox_environments=tox_environments))
-        print("Wrote {}".format(name))
+        if name == "Dockerfile":
+            for version in versions:
+                path = join("ci", version, "Dockerfile")
+                with open(join(base_path, path), "w") as fh:
+                    fh.write(jinja.get_template(name).render(version=version))
+                print("Wrote {}".format(path))
+        else:
+            with open(join(base_path, name), "w") as fh:
+                fh.write(jinja.get_template(name).render(dockerfiles=dockerfiles))
+            print("Wrote {}".format(name))
     print("DONE.")

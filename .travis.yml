@@ -1,6 +1,6 @@
 language: python
 python: '3.5'
-sudo: false
+sudo: true
 env:
   global:
     - LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
@@ -9,11 +9,12 @@ env:
     - TOXENV=check
     - TOXENV=docs
 
-    - TOXENV=py27
-    - TOXENV=py33
-    - TOXENV=py34
-    - TOXENV=py35
-    - TOXENV=pypy
+    - DOCKERFILE=ci/2.7/Dockerfile
+
+    - DOCKERFILE=ci/3.4/Dockerfile
+
+    - DOCKERFILE=ci/3.5/Dockerfile
+
 before_install:
   - python --version
   - uname -a
@@ -25,7 +26,7 @@ install:
   - pip --version
   - tox --version
 script:
-  - tox -v
+  - if [ -z "$TOXENV"]; then tox -v; else docker build -f $DOCKERFILE .; fi
 after_failure:
   - more .tox/log/* | cat
   - more .tox/*/log/* | cat

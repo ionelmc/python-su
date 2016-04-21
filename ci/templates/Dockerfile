@@ -1,7 +1,7 @@
-FROM python:2.7-alpine
+FROM python:{{ version }}-alpine
 # taken from https://github.com/tianon/gosu/blob/master/Dockerfile.test
-# however, some tests are disabled as I believe the handling is incorrect - if user don't exit then it should be an error, not
-# a fallback to root.
+# however, some tests are disabled as I believe the handling is incorrect - if user don't exist then it should be an error,
+# not a fallback to current user (which unfortunately is root).
 
 # add "nobody" to ALL groups (makes testing edge cases more interesting)
 RUN cut -d: -f1 /etc/group | xargs -n1 addgroup nobody
