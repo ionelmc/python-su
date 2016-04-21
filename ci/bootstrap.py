@@ -42,19 +42,22 @@ if __name__ == "__main__":
         lstrip_blocks=True,
         keep_trailing_newline=True
     )
-    versions = ["2.7", "3.4", "3.5"]
-    dockerfiles = [join("ci", version, "Dockerfile") for version in versions]
-
+    tox_environments = [
+        line.strip()
+        for line in subprocess.check_output(['tox', '--listenvs'], universal_newlines=True).splitlines()
+    ]
+    tox_environments = [line for line in tox_environments if line not in ['clean', 'report', 'docs', 'check']]
+    dockerfiles = [join("ci", env, "Dockerfile") for env in tox_environments]
 
     for name in os.listdir(join("ci", "templates")):
         if name == "Dockerfile":
-            for version in versions:
-                path = join("ci", version, "Dockerfile")
+            for env in tox_environments:
+                path = join("ci", env, "Dockerfile")
                 with open(join(base_path, path), "w") as fh:
-                    fh.write(jinja.get_template(name).render(version=version))
+                    fh.write(jinja.get_template(name).render(version="{0[2]}.{0[3]}".format(env)))
                 print("Wrote {}".format(path))
         else:
             with open(join(base_path, name), "w") as fh:
-                fh.write(jinja.get_template(name).render(dockerfiles=dockerfiles))
+                fh.write(jinja.get_template(name).render(tox_environments=tox_environments))
             print("Wrote {}".format(name))
     print("DONE.")
