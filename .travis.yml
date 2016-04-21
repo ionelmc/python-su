@@ -1,6 +1,8 @@
 language: python
 python: '3.5'
-sudo: true
+sudo: required
+services:
+  - docker
 env:
   global:
     - LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
