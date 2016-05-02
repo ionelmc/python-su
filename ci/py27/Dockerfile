@@ -25,6 +25,12 @@ RUN { \
 
 COPY . /root/
 RUN pip install --disable-pip-version-check /root/
+# adjust users so we can make sure the tests are interesting
+RUN chgrp nobody $(which python) $(which pysu) \
+	&& chmod +s $(which python) $(which pysu)
+USER nobody
+ENV HOME /omg/really/gosu/nowhere
+# now we should be nobody, ALL groups, and have a bogus useless HOME value
 
 RUN id
 
@@ -45,7 +51,7 @@ RUN pysu-t games:daemon "$(id -u games):$(id -g daemon):$(id -g daemon)" 'games:
 
 RUN pysu-t 0: "0:0:$(id -G root)" "root:root:$(id -Gn root)"
 #RUN pysu-t '' "$(id -u):$(id -g):$(id -G)" "$(id -un):$(id -gn):$(id -Gn)"
-#RUN pysu-t ':0' "$(id -u):0:0" "$(id -un):root:root"
+RUN pysu-t ':0' "$(id -u):0:0" "$(id -un):root:root"
 
 RUN [ "$(pysu 0 env | grep '^HOME=')" = 'HOME=/root' ]
 RUN [ "$(pysu 0:0 env | grep '^HOME=')" = 'HOME=/root' ]

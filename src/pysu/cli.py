@@ -32,7 +32,14 @@ def main():
         try:
             pw = pwd.getpwnam(user)
         except KeyError:
-            parser.error("Unknown user name %r." % user)
+            if group is None:
+                parser.error("Unknown user name %r." % user)
+            else:
+                uid = os.getuid()
+                try:
+                    pw = pwd.getpwuid(uid)
+                except KeyError:
+                    pw = None
         else:
             uid = pw.pw_uid
 
