@@ -24,7 +24,7 @@ def read(*names, **kwargs):
 
 setup(
     name='pysu',
-    version='0.1.0',
+    version='0.2.0',
     license='BSD',
     description='Simple Python-based setuid+setgid+setgroups+exec. A port of https://github.com/tianon/gosu',
     long_description='%s\n%s' % (
