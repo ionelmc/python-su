@@ -13,7 +13,7 @@ def read(*names, **kwargs):
 
 setup(
     name="pysu",
-    version="0.2.0",
+    version="1.0.0",
     license="BSD-2-Clause",
     description="Simple Python-based setuid+setgid+setgroups+exec. A port of https://github.com/tianon/gosu",
     long_description="{}\n{}".format(
