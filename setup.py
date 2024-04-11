@@ -70,7 +70,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "pysu = pysu.cli:run",
+            "pysu = pysu.cli:main",
         ]
     },
 )
