@@ -2,7 +2,7 @@
 Changelog
 =========
 
-1.0.0 (2024-04-11)
+1.0.0 (2024-04-12)
 ------------------
 
 * Dropped support for old Pythons. Minium supported version is 3.8.
