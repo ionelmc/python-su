@@ -1,11 +1,13 @@
 [paths]
 source =
-   src/pysu
-   */site-packages/pysu
+   src
+   */site-packages
 
 [run]
-branch = True
-source = pysu
+branch = true
+source =
+    pysu
+    tests
 parallel = true
 
 [report]

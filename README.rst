@@ -8,49 +8,41 @@ Overview
     :stub-columns: 1
 
     * - tests
-      - | |travis| |requires|
-        |
+      - |github-actions|
     * - package
-      - |version| |downloads| |wheel| |supported-versions| |supported-implementations|
+      - |version| |wheel| |supported-versions| |supported-implementations| |commits-since|
 
-.. |docs| image:: https://readthedocs.org/projects/python-su/badge/?style=flat
-    :target: https://readthedocs.org/projects/python-su
-    :alt: Documentation Status
+.. |github-actions| image:: https://github.com/ionelmc/python-su/actions/workflows/github-actions.yml/badge.svg
+    :alt: GitHub Actions Build Status
+    :target: https://github.com/ionelmc/python-su/actions
 
-.. |travis| image:: https://travis-ci.org/ionelmc/python-su.svg?branch=master
-    :alt: Travis-CI Build Status
-    :target: https://travis-ci.org/ionelmc/python-su
-
-.. |requires| image:: https://requires.io/github/ionelmc/python-su/requirements.svg?branch=master
-    :alt: Requirements Status
-    :target: https://requires.io/github/ionelmc/python-su/requirements/?branch=master
-
-.. |version| image:: https://img.shields.io/pypi/v/pysu.svg?style=flat
+.. |version| image:: https://img.shields.io/pypi/v/pysu.svg
     :alt: PyPI Package latest release
-    :target: https://pypi.python.org/pypi/pysu
+    :target: https://pypi.org/project/pysu
 
-.. |downloads| image:: https://img.shields.io/pypi/dm/pysu.svg?style=flat
-    :alt: PyPI Package monthly downloads
-    :target: https://pypi.python.org/pypi/pysu
-
-.. |wheel| image:: https://img.shields.io/pypi/wheel/pysu.svg?style=flat
+.. |wheel| image:: https://img.shields.io/pypi/wheel/pysu.svg
     :alt: PyPI Wheel
-    :target: https://pypi.python.org/pypi/pysu
+    :target: https://pypi.org/project/pysu
 
-.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/pysu.svg?style=flat
+.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/pysu.svg
     :alt: Supported versions
-    :target: https://pypi.python.org/pypi/pysu
+    :target: https://pypi.org/project/pysu
 
-.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/pysu.svg?style=flat
+.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/pysu.svg
     :alt: Supported implementations
-    :target: https://pypi.python.org/pypi/pysu
+    :target: https://pypi.org/project/pysu
+
+.. |commits-since| image:: https://img.shields.io/github/commits-since/ionelmc/python-su/v0.2.0.svg
+    :alt: Commits since latest release
+    :target: https://github.com/ionelmc/python-su/compare/v0.2.0...master
+
 
 
 .. end-badges
 
 Simple Python-based setuid+setgid+setgroups+exec. A port of https://github.com/tianon/gosu
 
-* Free software: BSD license
+* Free software: BSD 2-Clause License
 
 Installation
 ============
@@ -58,6 +50,11 @@ Installation
 ::
 
     pip install pysu
+
+You can also install the in-development version with::
+
+    pip install https://github.com/ionelmc/python-su/archive/master.zip
+
 
 Documentation
 =============
@@ -76,6 +73,23 @@ optional arguments:
 Development
 ===========
 
-To run the all tests run::
+To run all the tests run::
 
     tox
+
+Note, to combine the coverage data from all the tox environments run:
+
+.. list-table::
+    :widths: 10 90
+    :stub-columns: 1
+
+    - - Windows
+      - ::
+
+            set PYTEST_ADDOPTS=--cov-append
+            tox
+
+    - - Other
+      - ::
+
+            PYTEST_ADDOPTS=--cov-append tox
