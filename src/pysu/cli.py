@@ -36,7 +36,7 @@ def main(argv=None):
             pw = pwd.getpwuid(uid)
         except KeyError:
             pw = None
-    print(pw, file=sys.stderr)
+
     if pw:
         home = pw.pw_dir
         name = pw.pw_name
